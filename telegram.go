@@ -5,15 +5,15 @@ import (
 	"errors"
 	"io"
 	"strings"
+	"time"
 
-	"github.com/rclone/rclone/backend"
+	"github.com/rclone/rclone/cmd/backend"
 	"github.com/rclone/rclone/fs"
 	"github.com/rclone/rclone/fs/config/configmap"
 	"github.com/rclone/rclone/fs/config/configstruct"
 	"github.com/rclone/rclone/fs/fshttp"
 	"github.com/rclone/rclone/fs/hash"
 	"github.com/rclone/rclone/lib/readers"
-	"github.com/rclone/rclone/lib/timedata"
 	"github.com/rclone/rclone/vfs"
 	"gopkg.in/telebot.v3"
 )
@@ -136,7 +136,7 @@ func (f *Fs) Put(ctx context.Context, in io.Reader, src fs.ObjectInfo, options .
 		path:      "/" + message.Document.FileID,
 		name:      fileName,
 		size:      src.Size(),
-		modTime:   message.Date,
+		modTime:   time.Now(),
 		isDir:     false,
 	}, nil
 }
